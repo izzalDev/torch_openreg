@@ -6,7 +6,8 @@ file(GLOB_RECURSE SOURCE_FILES
 
 add_library(${LIBRARY_NAME} SHARED ${SOURCE_FILES})
 
-target_link_libraries(${LIBRARY_NAME} PRIVATE torch_python_library torch_openreg)
+target_include_directories(${LIBRARY_NAME} PRIVATE ${TORCH_INCLUDE_DIRS})
+target_link_libraries(${LIBRARY_NAME} PRIVATE torch_cpu_library torch_openreg_core)
 
 if(WIN32)
     find_package(Python3 COMPONENTS Interpreter Development REQUIRED)

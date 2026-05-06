@@ -1,4 +1,4 @@
-set(LIBRARY_NAME torch_openreg)
+set(LIBRARY_NAME torch_openreg_core)
 
 file(GLOB_RECURSE SOURCE_FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
@@ -6,8 +6,8 @@ file(GLOB_RECURSE SOURCE_FILES
 
 add_library(${LIBRARY_NAME} SHARED ${SOURCE_FILES})
 
-target_link_libraries(${LIBRARY_NAME} PRIVATE torch_cpu_library torch_python_library openreg)
 target_include_directories(${LIBRARY_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(${LIBRARY_NAME} PRIVATE torch_cpu_library openreg)
 
 install(TARGETS ${LIBRARY_NAME}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

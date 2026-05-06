@@ -27,17 +27,11 @@ endif()
 set(CMAKE_INSTALL_LIBDIR lib)
 set(CMAKE_INSTALL_MESSAGE NEVER)
 
-set(Torch_DIR ${PYTORCH_INSTALL_DIR}/share/cmake/Torch)
 find_package(Torch REQUIRED)
-
-if(DEFINED PYTHON_INCLUDE_DIR)
-  include_directories(${PYTHON_INCLUDE_DIR})
-else()
-  message(FATAL_ERROR "Cannot find Python directory")
-endif()
+find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
+include_directories(${Python_INCLUDE_DIRS})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-include(${PROJECT_SOURCE_DIR}/cmake/TorchPythonTargets.cmake)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/openreg)
 add_subdirectory(${PROJECT_SOURCE_DIR}/csrc)

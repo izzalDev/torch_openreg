@@ -1,11 +1,9 @@
 [build-system]
 requires = [
-    "setuptools",
-    "wheel",
-    "torch", # Needed by setup.py for getting include of PyTorch
+    "scikit-build-core",
+    "torch",
 ]
-
-build-backend = "setuptools.build_meta"
+build-backend = "scikit_build_core.build"
 
 [project]
 name = "torch_openreg"
@@ -18,7 +16,6 @@ authors = [{ name = "PyTorch Team", email = "packages@pytorch.org" }]
 dependencies = [
     "torch",
 ]
-# Add classifiers info for making lint happy
 classifiers = [
     "Development Status :: 4 - Beta",
     "Topic :: Software Development",
@@ -33,3 +30,11 @@ Homepage = "https://pytorch.org"
 Repository = "https://github.com/pytorch/pytorch"
 Documentation = "https://pytorch.org/docs"
 Forum = "https://discuss.pytorch.org"
+
+[project.entry-points."torch.backends"]
+torch_openreg = "torch_openreg:_autoload"
+
+[tool.scikit-build]
+cmake.build-type = "Release"
+cmake.args = ["-DUSE_TEST=OFF"]
+wheel.packages = ["torch_openreg"]
